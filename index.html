@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indian Mobile Number Validation</title>
+    <style>
+        body {
+            background-color: #f0f8ff;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin: 100px auto;
+            padding: 20px;
+            width: 400px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"], input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+        .call-link {
+            display: none;
+            margin-top: 15px;
+            text-align: center;
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .call-link:hover {
+            color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Validate Indian Mobile Numbers</h2>
+    <form id="mobileForm">
+        <label for="mobile">Enter Mobile Number:</label>
+        <input type="text" id="mobile" name="mobile" placeholder="Enter 10-digit mobile number" required>
+        <input type="submit" value="Validate">
+        <div id="error" class="error"></div>
+        <a id="callLink" class="call-link" href="#">Call this number</a>
+    </form>
+</div>
+
+<script>
+    document.getElementById('mobileForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var mobile = document.getElementById('mobile').value;
+        var errorDiv = document.getElementById('error');
+        var callLink = document.getElementById('callLink');
+
+        // Regular Expression for Indian mobile numbers (Jio, Airtel, Vodafone, etc.)
+        var regex = /^[6-9]\d{9}$/; // Starts with 6-9, followed by 9 digits
+
+        if (regex.test(mobile)) {
+            errorDiv.textContent = 'Mobile number is valid!';
+            errorDiv.style.color = 'green';
+
+            // Replace the href dynamically with the entered mobile number using tel:
+            callLink.href = 'tel:' + mobile;
+            callLink.textContent = 'Call ' + mobile;
+            callLink.style.display = 'inline-block'; // Show the call link
+        } else {
+            errorDiv.textContent = 'Invalid mobile number. Please enter a valid 10-digit Indian mobile number.';
+            errorDiv.style.color = 'red';
+            callLink.style.display = 'none'; // Hide the call link
+        }
+    });
+</script>
+
+</body>
+</html>
